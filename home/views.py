@@ -4,9 +4,10 @@ from django.http import HttpResponseRedirect, JsonResponse
 
 
 def todo(request):
-    active = ToDo.objects.all().filter(status="active")
-    completed = ToDo.objects.all().filter(status="done")
-    return render(request, 'index.html', {'active': active, 'completed': completed})
+    due = ToDo.objects.all().filter(status="due")
+    done = ToDo.objects.all().filter(status="done")
+    overdue = ToDo.objects.all().filter(status='overdue')
+    return render(request, 'index.html', {'overdue': overdue, 'done': done, 'due': due})
 
 
 def add(request):
@@ -19,7 +20,7 @@ def addtask(request):
     time = request.POST.get('time')
     priority = request.POST.get('priority')
     category = request.POST.get('category')
-    ToDo.objects.create(task=task, date=date, time=time, priority=priority, category=category, status="active")
+    ToDo.objects.create(task=task, date=date, time=time, priority=priority, category=category, status="due")
     return HttpResponseRedirect('/')
 
 
@@ -31,7 +32,6 @@ def done(request, id):
 
 
 def edit(request, id):
-    ToDo.objects.get(id=id).delete()
     return HttpResponseRedirect('/')
 
 

@@ -1,32 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <title>ToDo</title>
-  {% load static %}
+    {% load static %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-      <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-     <link href="{% static 'css/form-bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link href="{% static 'css/form-bootstrap.min.css' %}" rel="stylesheet">
 
     <script>
-    document.getElementById('name').innerHTML = document.getElementsByName('name').values().toString();
-</script>
+        document.getElementById('name').innerHTML = document.getElementsByName('name').values().toString();
+    </script>
     <script type="text/javascript" src="{% static 'js/jquery-1.8.0.min.js' %}"></script>
+    <style>
+        .section {
+            position: relative;
+            height: 100vh;
+        }
+
+        .section .section-center {
+            position: absolute;
+            top: 40%;
+            left: 0;
+            right: 0;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        #booking {
+          font-family: 'Montserrat', sans-serif;
+          {#background-image: url("{% static 'img/bg.jpg' %}");#}
+            background-color: #9d9d9d;
+          background-size: cover;
+          background-position: center;
+        }
+
+
+        .booking-form {
+            background-image: url("{% static 'img/bg.jpg' %}");
+            {#background-color: #000;#}
+            {#opacity: 0.7;#}
+            padding: 50px 20px;
+            -webkit-box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .booking-form .form-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .booking-form .form-control {
+            background-color: #ebecee;
+            border-radius: 4px;
+            border: none;
+            height: 40px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            color: #3e485c;
+            font-size: 14px;
+        }
+
+        .booking-form .form-control::-webkit-input-placeholder {
+            color: rgba(62, 72, 92, 0.3);
+        }
+
+        .booking-form .form-control:-ms-input-placeholder {
+            color: rgba(62, 72, 92, 0.3);
+        }
+
+        .booking-form .form-control::placeholder {
+            color: rgba(62, 72, 92, 0.3);
+        }
+
+        .booking-form input[type="date"].form-control:invalid {
+            color: rgba(62, 72, 92, 0.3);
+        }
+
+        .booking-form select.form-control {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .booking-form select.form-control + .select-arrow {
+            position: absolute;
+            right: 0px;
+            bottom: 4px;
+            width: 32px;
+            line-height: 32px;
+            height: 32px;
+            text-align: center;
+            pointer-events: none;
+            color: rgba(62, 72, 92, 0.3);
+            font-size: 14px;
+        }
+
+        .booking-form select.form-control + .select-arrow:after {
+            content: '\279C';
+            display: block;
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+
+        .booking-form .form-label {
+            display: inline-block;
+            color: #3e485c;
+            font-weight: 700;
+            margin-bottom: 6px;
+            margin-left: 7px;
+        }
+
+        .booking-form .button {
+            display: inline-block;
+            color: #fff;
+            background-color: #1e62d8;
+            font-weight: 700;
+            padding: 14px 30px;
+            border-radius: 4px;
+            margin-left: 30px;
+            border: none;
+            -webkit-transition: 0.2s all;
+            transition: 0.2s all;
+        }
+
+        .booking-form .button:hover,
+        .booking-form .button:focus {
+            opacity: 0.9;
+        }
+
+        .booking-cta {
+            margin-top: 80px;
+            margin-bottom: 30px;
+        }
+
+        .booking-cta h1 {
+            font-size: 52px;
+            text-transform: uppercase;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .booking-cta p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+    </style>
+
 </head>
 
 
 <body>
-    <section class="navigation">
-  <div class="nav-container">
-    <div class="back">
-      <a href="/"><img src="{% static 'img/back.png' %}"  height="42" width="42" alt="" /></a>
+<section class="navigation">
+    <div class="nav-container">
+        <div class="back">
+            <a href="/"><img src="{% static 'img/back.png' %}" height="42" width="42" alt=""/></a>
+        </div>
+        <div class="brand">
+            <a href="#">Add Task</a>
+        </div>
     </div>
-    <div class="brand">
-      <a href="#">Add Task</a>
-    </div>
-  </div>
-    </section>
-<br><br><br>
+</section>
 
 {#<form action="addsubscriber" method="post">#}
 {#{% csrf_token %}#}
@@ -46,90 +182,88 @@
 
 <div id="booking" class="section">
     <div class="section-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 col-md-push-3">
-            <div class="booking-cta">
-            <h1 style="color:#091D48">
-            Add Your Task
-              </h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-md-push-3">
+                    <div class="booking-cta">
+                        <h1 style="color:#091D48">
+                            Add Your Task
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-md-15 col-md-pull-3">
+                    <div class="booking-form">
+                        <form action="addtask/" method="Post" id="submit">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <span class="form-label">Task</span>
+                                        <input class="form-control" type="text" id="task" name="task"
+                                               placeholder="What you want me to remember!" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <span class="form-label">Date</span>
+                                        <input class="form-control" type="date" id="date" name="date" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <span class="form-label">Time</span>
+                                        <input class="form-control" type="time" id="time" name="time" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <span class="form-label">Category</span>
+                                        <select class="form-control" id="category" name="category" required>
+                                            <option>None</option>
+                                            <option>Study</option>
+                                            <option>Call</option>
+                                            <option>Finance</option>
+                                        </select>
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <span class="form-label">Priority</span>
+                                        <select class="form-control" id="priority" name="priority" required>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div style="overflow:auto;">
+                                    <div class="form-btn">
+                                        <div>
+                                            <input type="submit" value="Add" name="button" class="button"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-15 col-md-pull-3">
-            <div class="booking-form">
-              <form action="addtask/" method="Post" id="submit">
-                 {% csrf_token %}
-                     <div class="row">
-                  <div class="col-sm-8">
-                    <div class="form-group">
-                      <span class="form-label">Task</span>
-                      <input class="form-control" type="text" id="task" name="task" placeholder="What you want me to remember!" required>
-                    </div>
-                  </div>
-                     </div>
-                <div class="row">
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <span class="form-label">Date</span>
-                      <input class="form-control" type="date" id="date" name="date" required>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <span class="form-label">Time</span>
-                      <input class="form-control" type="time" id="time" name="time" required>
-                    </div>
-                  </div>
-
-                </div>
-                <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                    <span class="form-label">Category</span>
-                      <select class="form-control" id="category" name="category" required>
-                        <option>None</option>
-                        <option>Study</option>
-                        <option>Call</option>
-                        <option>Finance</option>
-
-                      </select>
-                      <span class="select-arrow"></span>
-                    </div>
-                </div>
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <span class="form-label">Priority</span>
-                      <select class="form-control" id="priority" name="priority" required>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                      </select>
-                      <span class="select-arrow"></span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-
-                        <div style="overflow:auto;">
-                  <div class="form-btn">
-                  <div style="float:right;">
-  <input type="submit" value="Add" name="button" class="button"/>
-    </div>
-                  </div>
-                        </div>
-                 </div>
-
-              </form>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
 </div>
 
 </body>
-    <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         $('#name').keyup(function () {
             var name = $(this).val();
@@ -148,13 +282,13 @@
             })
         })
     });
-    </script>
+</script>
 {##}
 {#<script>#}
 {#        document.getElementById("submit").submit();#}
 {#</script>#}
 
-    <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         $('#number').keyup(function () {
             var number = $(this).val();
