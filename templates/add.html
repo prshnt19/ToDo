@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>ToDo</title>
+  {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+      <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+     <link href="{% static 'css/form-bootstrap.min.css' %}" rel="stylesheet">
+
+    <script>
+    document.getElementById('name').innerHTML = document.getElementsByName('name').values().toString();
+</script>
+    <script type="text/javascript" src="{% static 'js/jquery-1.8.0.min.js' %}"></script>
+</head>
+
+
+<body>
+    <section class="navigation">
+  <div class="nav-container">
+    <div class="back">
+      <a href="/"><img src="{% static 'img/back.png' %}"  height="42" width="42" alt="" /></a>
+    </div>
+    <div class="brand">
+      <a href="#">Add Task</a>
+    </div>
+  </div>
+    </section>
+<br><br><br>
+
+{#<form action="addsubscriber" method="post">#}
+{#{% csrf_token %}#}
+{#  Task: <input type="text" id="task" name="task" placeholder="What you want to remember"/>#}
+{#    <br><br>#}
+{#  Date: <input type="date" id="date" name="date">#}
+{#    <br><br>#}
+{#  Time: <input type="time" id="time" name="time">#}
+{#    <br><br>#}
+{#  <br>#}
+{#  <input type="submit" value="Add" name="button" class="button"/> <input type="reset" class="button">#}
+{#</form>#}
+{#    <br><br>#}
+{##}
+{#Name : <label id="lname" ></label><br>#}
+{#Number : <label id="lnumber"></label>#}
+
+<div id="booking" class="section">
+    <div class="section-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-md-push-3">
+            <div class="booking-cta">
+            <h1 style="color:#091D48">
+            Add Your Task
+              </h1>
+            </div>
+          </div>
+          <div class="col-md-15 col-md-pull-3">
+            <div class="booking-form">
+              <form action="addtask/" method="Post" id="submit">
+                 {% csrf_token %}
+                     <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <span class="form-label">Task</span>
+                      <input class="form-control" type="text" id="task" name="task" placeholder="What you want me to remember!" required>
+                    </div>
+                  </div>
+                     </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <span class="form-label">Date</span>
+                      <input class="form-control" type="date" id="date" name="date" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <span class="form-label">Time</span>
+                      <input class="form-control" type="time" id="time" name="time" required>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                    <span class="form-label">Category</span>
+                      <select class="form-control" id="category" name="category" required>
+                        <option>None</option>
+                        <option>Study</option>
+                        <option>Call</option>
+                        <option>Finance</option>
+
+                      </select>
+                      <span class="select-arrow"></span>
+                    </div>
+                </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <span class="form-label">Priority</span>
+                      <select class="form-control" id="priority" name="priority" required>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                      </select>
+                      <span class="select-arrow"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+
+                        <div style="overflow:auto;">
+                  <div class="form-btn">
+                  <div style="float:right;">
+  <input type="submit" value="Add" name="button" class="button"/>
+    </div>
+                  </div>
+                        </div>
+                 </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+</body>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#name').keyup(function () {
+            var name = $(this).val();
+            $.ajax({
+                url: "/add/name/",
+                type: "POST",
+                data: {
+                    'name': name,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                cache: false,
+                dataType: 'json',
+                success: function (resp) {
+                    document.getElementById('lname').innerText = name;
+                }
+            })
+        })
+    });
+    </script>
+{##}
+{#<script>#}
+{#        document.getElementById("submit").submit();#}
+{#</script>#}
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#number').keyup(function () {
+            var number = $(this).val();
+            document.getElementById('lnumber').innerText = number;
+        })
+    });
+</script>
+</html>
