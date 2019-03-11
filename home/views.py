@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import ToDo
 from django.http import HttpResponseRedirect, JsonResponse
+from .tasks import send_email
 
 
 def todo(request):
@@ -20,7 +21,8 @@ def addtask(request):
     time = request.POST.get('time')
     priority = request.POST.get('priority')
     category = request.POST.get('category')
-    ToDo.objects.create(task=task, date=date, time=time, priority=priority, category=category, status="due")
+    todo = ToDo.objects.create(task=task, date=date, time=time, priority=priority, category=category, status="due")
+    send_email.delay(todo.id)
     return HttpResponseRedirect('/')
 
 
