@@ -81,7 +81,6 @@
             background-color: rgba(255, 255, 255, 0.2);
             z-index: -1;
         }
-
         }
         }
         }
@@ -161,7 +160,7 @@
                 {#                <!--<th></th>-->#}
                 {#            </tr>#}
                 {#            </thead>#}
-                <tbody>
+                <tbody id="todo">
                 {% for item in due %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
@@ -177,7 +176,6 @@
                                                                   height="25" alt=""></a></td>
                     </tr>
                 {% endfor %}
-
                 </tbody>
             </table>
         </div>
@@ -210,7 +208,6 @@
                                                                   height="25" alt=""></a></td>
                     </tr>
                 {% endfor %}
-
                 </tbody>
             </table>
         </div>
@@ -220,6 +217,11 @@
 <script src="{% static 'js/profile.js' %}"></script>
 </body>
 <script type="text/javascript">
-
+    $(document).ready(function () {
+        $('#number').keyup(function () {
+            var number = $(this).val();
+            document.getElementById('lnumber').innerText = number;
+        })
+    });
 </script>
 </html>
